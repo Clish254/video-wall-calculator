@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Azeret_Mono } from "next/font/google";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 const displayFont = Bricolage_Grotesque({
@@ -26,6 +27,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={`${displayFont.variable} ${monoFont.variable} antialiased`}>
         {children}
+        <Toaster />
       </body>
     </html>
   );

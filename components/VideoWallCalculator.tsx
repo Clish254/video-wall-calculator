@@ -27,6 +27,7 @@ import { findGridResults } from "@/lib/calculator";
 import { resolveGeometry, validateGeometry } from "@/lib/geometry";
 import { convertValue, formatUnitValue, toMm } from "@/lib/units";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 import type {
   AspectRatioPreset,
   CabinetSpec,
@@ -669,6 +670,9 @@ export default function VideoWallCalculator() {
     const nextResults = findGridResults(cabinet, geometryResult, metricKey);
 
     dispatch({ type: "applyResults", results: nextResults });
+    toast.success("Changes applied", {
+      description: "Results have been updated.",
+    });
   };
 
   return (
