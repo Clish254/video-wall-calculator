@@ -3,7 +3,6 @@ import type { GridCandidate } from "@/types";
 type GridVisualizationProps = {
   candidate: GridCandidate | null;
   showVideo: boolean;
-  resultLabel: "lower" | "upper";
   widthMeasurement: string | null;
   heightMeasurement: string | null;
 };
@@ -11,7 +10,6 @@ type GridVisualizationProps = {
 export default function GridVisualization({
   candidate,
   showVideo,
-  resultLabel,
   widthMeasurement,
   heightMeasurement,
 }: GridVisualizationProps) {
@@ -35,39 +33,39 @@ export default function GridVisualization({
   } as const;
 
   return (
-    <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/15 bg-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)]">
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        src="/bugatti.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-      />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(6,182,212,0.22),transparent_55%),linear-gradient(to_bottom,rgba(2,6,23,0.2),rgba(2,6,23,0.55))]" />
-      <div className="absolute inset-0 opacity-80 mix-blend-screen" style={gridStyle} />
+    <div className="w-full">
+      <div className="flex items-center gap-2 sm:gap-4">
+        {heightMeasurement && (
+          <div className="pointer-events-none rounded-full border border-white/25 bg-slate-950/70 px-3 py-1 text-xs font-medium text-slate-100 backdrop-blur-sm -rotate-90">
+            Height {heightMeasurement}
+          </div>
+        )}
 
-      <div className="pointer-events-none absolute right-4 top-4 rounded-full border border-white/25 bg-slate-950/55 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.26em] text-slate-200">
-        {resultLabel} result
+        <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/15 bg-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)]">
+          <video
+            className="absolute inset-0 h-full w-full object-cover"
+            src="/bugatti.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(6,182,212,0.22),transparent_55%),linear-gradient(to_bottom,rgba(2,6,23,0.2),rgba(2,6,23,0.55))]" />
+          <div
+            className="absolute inset-0 opacity-80 mix-blend-screen"
+            style={gridStyle}
+          />
+
+        </div>
       </div>
 
       {widthMeasurement && (
-        <div className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full border border-white/25 bg-slate-950/70 px-3 py-1 text-xs font-medium text-slate-100 backdrop-blur-sm">
-          Width {widthMeasurement}
+        <div className="mt-3 flex justify-center">
+          <div className="pointer-events-none rounded-full border border-white/25 bg-slate-950/70 px-3 py-1 text-xs font-medium text-slate-100 backdrop-blur-sm">
+            Width {widthMeasurement}
+          </div>
         </div>
       )}
-
-      {heightMeasurement && (
-        <div className="pointer-events-none absolute left-1 top-1/2 -translate-y-1/2 -rotate-90 rounded-full border border-white/25 bg-slate-950/70 px-3 py-1 text-xs font-medium text-slate-100 backdrop-blur-sm">
-          Height {heightMeasurement}
-        </div>
-      )}
-
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center p-4">
-        <div className="rounded-full border border-white/20 bg-slate-950/65 px-4 py-2 text-xs uppercase tracking-[0.26em] text-slate-100">
-          {candidate.cols} x {candidate.rows}
-        </div>
-      </div>
     </div>
   );
 }

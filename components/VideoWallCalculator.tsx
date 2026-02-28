@@ -471,11 +471,15 @@ function PreviewCard({
           </ToggleGroup>
         </div>
 
-        <div className="mx-auto w-full max-w-[980px]">
+        <div className="mx-auto flex w-full max-w-[980px] flex-col items-center gap-3">
+          {activeCandidate && (
+            <div className="rounded-full border border-white/20 bg-slate-950/65 px-4 py-2 text-xs uppercase tracking-[0.26em] text-slate-100">
+              {activeCandidate.cols} x {activeCandidate.rows}
+            </div>
+          )}
           <GridVisualization
             candidate={activeCandidate}
             showVideo={Boolean(activeCandidate)}
-            resultLabel={activeResult}
             widthMeasurement={widthMeasurement}
             heightMeasurement={heightMeasurement}
           />
