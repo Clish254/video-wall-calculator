@@ -31,6 +31,13 @@ export default function GridVisualization({
       "linear-gradient(to right, rgba(248,250,252,0.32) 1px, transparent 1px), linear-gradient(to bottom, rgba(248,250,252,0.32) 1px, transparent 1px)",
     backgroundSize: `calc(100% / ${candidate.cols}) calc(100% / ${candidate.rows})`,
   } as const;
+  const wallStyle = {
+    aspectRatio: `${candidate.widthMm} / ${candidate.heightMm}`,
+    width:
+      candidate.aspectRatio >= 1
+        ? "100%"
+        : `min(100%, calc(70vh * ${candidate.aspectRatio}))`,
+  } as const;
 
   return (
     <div className="w-full">
@@ -41,7 +48,10 @@ export default function GridVisualization({
           </div>
         )}
 
-        <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/15 bg-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)]">
+        <div
+          className="relative mx-auto max-w-full overflow-hidden rounded-2xl border border-white/15 bg-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)]"
+          style={wallStyle}
+        >
           <video
             className="absolute inset-0 h-full w-full object-cover"
             src="/bugatti.mp4"
